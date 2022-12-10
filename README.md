@@ -8,13 +8,13 @@ at startup, as well as renewed (if necessary) once a week with an internal cron 
 ### Pull from Github Packages:
 
 ```
-docker pull alihmahdavi/flux-lb:latest
+docker pull alihmahdavi/flux-mini-fdm:latest
 ```
 
 ### Build from Dockerfile:
 
 ```
-docker build -t flux-lb:latest .
+docker build -t flux-mini-fdm:latest .
 ```
 
 ### Run container:
@@ -29,12 +29,12 @@ docker run --name lb -d \
     -e EMAIL=my.email@my.domain \
     -e STAGING=false \
     -p 80:80 -p 443:443 -p 8080:8080 \
-    alihmahdavi/flux-lb:latest
+    alihmahdavi/flux-mini-fdm:latest
 ```
 
 ### Customizing Haproxy
 
-    docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg alihmahdavi/flux-lb:latest
+    docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg alihmahdavi/flux-mini-fdm:latest
 
 Use the provided haproxy config file in `conf` folder as the template.
 
