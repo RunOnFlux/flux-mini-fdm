@@ -47,7 +47,7 @@ COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/haproxy.cfg /etc/haproxy/haproxy.cfg
 COPY haproxy-acme-validation-plugin/acme-http01-webroot.lua /etc/haproxy
 # renewal script
-COPY scripts/cert-renewal-haproxy.sh /
+COPY --chmod=777 scripts/cert-renewal-haproxy.sh /
 # renewal cron job
 COPY conf/crontab.txt /var/crontab.txt
 # install cron job and remove useless ones
