@@ -1,7 +1,7 @@
 # Dockerized mini FDM
 
 This container provides an HAProxy instance with Let's Encrypt certificates generated
-at startup, as well as renewed (if necessary) once a week with an internal cron job. It calls Flux API every few munites and updates HAProxy server list for the provided flux `APP_NAME` and `APP_PORT`.
+at startup, as well as renewed (if necessary) once a week with an internal cron job. It calls Flux API every few munites and updates HAProxy server list for the provided Flux `APP_NAME` and `APP_PORT`.
 
 ## Usage
 
