@@ -63,7 +63,7 @@ async function updateList(){
     } catch(err){
       console.log(err);
     }
-    await timer.setTimeout(1000 * 60 * 30);
+    await timer.setTimeout(1000 * 60 * 20);
   }
 }
 
