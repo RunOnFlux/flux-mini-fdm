@@ -6,8 +6,8 @@ const util = require('util');
 const timer = require('timers/promises');
 
 const configFile = '/etc/haproxy/haproxy.cfg';
-const appName = process.env.APP_NAME || 'wordpressonflux';
-const appPort = process.env.APP_PORT || 33952;
+const appName = process.env.APP_NAME || 'explorer';
+const appPort = process.env.APP_PORT || 39185;
 const cmdAsync = util.promisify(nodecmd.run);
 
 async function getApplicationIP(appName) {
