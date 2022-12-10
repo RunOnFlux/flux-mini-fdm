@@ -38,9 +38,15 @@ docker run --name lb -d \
     docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg alihmahdavi/flux-mini-fdm:latest
 
 IMPORTANT: Use the provided haproxy config file in `conf` folder as the template.
+The provided haproxy configuration file comes with the "resolver docker" directive to permit DNS run-time resolution on backend hosts (see https://github.com/gesellix/docker-haproxy-network)
 
 ### Renewal cron job
 
 Once a week a cron job checks for expiring certificates with certbot agent and reload haproxy if a certificate is renewed. No container restart needed.
+
+### Credits
+
+https://github.com/tomdess/docker-haproxy-certbot
+
 
 
