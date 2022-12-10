@@ -20,7 +20,7 @@ docker build -t flux-mini-fdm:latest .
 ### Run container:
 
 Example of run command (replace APP_NAME, APP_PORT, DOMAIN, EMAIL values and volume paths with yours).
-Important Note: Before running the container make sure you've set the DNS records pointing to your server.
+IMPORTANT: Before running the container make sure you've set the correct DNS records pointing to your server.
 
 ```
 docker run --name lb -d \
@@ -37,7 +37,7 @@ docker run --name lb -d \
 
     docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg alihmahdavi/flux-mini-fdm:latest
 
-Important Note: Use the provided haproxy config file in `conf` folder as the template.
+IMPORTANT: Use the provided haproxy config file in `conf` folder as the template.
 
 ### Renewal cron job
 
