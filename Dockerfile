@@ -70,4 +70,4 @@ VOLUME /etc/letsencrypt
 
 ENV STAGING=false
 
-ENTRYPOINT ["/bootstrap.sh"]
+RUN ["sh", "/bootstrap.sh"]
