@@ -26,4 +26,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: alihmahdavi/flux-mini-fdm:latest
+          tags: runonflux/flux-mini-fdm:latest

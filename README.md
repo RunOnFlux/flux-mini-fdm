@@ -8,7 +8,7 @@ at startup, as well as renewed (if necessary) once a week with an internal cron 
 ### Pull from Github Packages:
 
 ```
-docker pull alihmahdavi/flux-mini-fdm:latest
+docker pull runonflux/flux-mini-fdm:latest
 ```
 
 ### Build from Dockerfile:
@@ -30,12 +30,12 @@ docker run --name lb -d \
     -e EMAIL=my.email@my.domain \
     -e STAGING=false \
     -p 80:80 -p 443:443 -p 8080:8080 \
-    alihmahdavi/flux-mini-fdm:latest
+    runonflux/flux-mini-fdm:latest
 ```
 
 ### Customizing Haproxy
 
-    docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg alihmahdavi/flux-mini-fdm:latest
+    docker run [...] -v <override-conf-file>:/etc/haproxy/haproxy.cfg runonflux/flux-mini-fdm:latest
 
 IMPORTANT: Use the provided haproxy config file in `conf` folder as the template.
 The provided haproxy configuration file comes with the "resolver docker" directive to permit DNS run-time resolution on backend hosts (see https://github.com/gesellix/docker-haproxy-network)
