@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
 
-if [ -n "$DOMAIN" ] || [ -n "$CERT" ]; then
+if [ -n "$DOMAIN" ] then
     if [ "$STAGING" = true ]; then
-        for certname in ${!CERT*}; do
-            certbot certonly --no-self-upgrade -n --text --standalone \
-            --preferred-challenges http-01 \
-            --staging \
-            -d "${!certname}" --keep --expand --agree-tos --email "$EMAIL" \
-            #|| exit 2
-        done
+      if [ -n "$ACME" ] then
+        certbot certonly --no-self-upgrade -n --text --standalone \
+        --preferred-challenges http-01 \
+        --staging \
+        -d "$DOMAIN" --server "$ACME" --keep --expand --agree-tos --email "$EMAIL" \
+      else
+        certbot certonly --no-self-upgrade -n --text --standalone \
+        --preferred-challenges http-01 \
+        --staging \
+        -d "$DOMAIN" --keep --expand --agree-tos --email "$EMAIL" \
+      fi
     else
-        for certname in ${!CERT*}; do
-          	certbot certonly --no-self-upgrade -n --text --standalone \
-            --preferred-challenges http-01 \
-            -d "${!certname}" --keep --expand --agree-tos --email "$EMAIL" \
-            #|| exit 1
-        done
+      if [ -n "$ACME" ] then
+        certbot certonly --no-self-upgrade -n --text --standalone \
+        --preferred-challenges http-01 \
+        -d "$DOMAIN" --server "$ACME" --keep --expand --agree-tos --email "$EMAIL" \
+      else
+        certbot certonly --no-self-upgrade -n --text --standalone \
+        --preferred-challenges http-01 \
+        -d "$DOMAIN" --keep --expand --agree-tos --email "$EMAIL" \
+      fi
     fi
 
     mkdir -p /etc/haproxy/certs
