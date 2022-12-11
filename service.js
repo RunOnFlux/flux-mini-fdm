@@ -1,3 +1,6 @@
+/* eslint-disable no-constant-condition */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 const axios = require('axios');
 const readline = require('readline');
 const fs = require('fs');
@@ -10,9 +13,9 @@ const appName = process.env.APP_NAME || 'explorer';
 const appPort = process.env.APP_PORT || 39185;
 const cmdAsync = util.promisify(nodecmd.run);
 
-async function getApplicationIP(appName) {
+async function getApplicationIP(_appName) {
   try {
-    const fluxnodeList = await axios.get(`https://api.runonflux.io/apps/location/${appName}`, { timeout: 13456 });
+    const fluxnodeList = await axios.get(`https://api.runonflux.io/apps/location/${_appName}`, { timeout: 13456 });
     if (fluxnodeList.data.status === 'success') {
       return fluxnodeList.data.data || [];
     }
@@ -28,7 +31,7 @@ function convertIP(ip) {
   return ip;
 }
 
-async function getHAConfig(){
+async function getHAConfig() {
   let HAconfig = '';
   const fileStream = fs.createReadStream(configFile);
 
@@ -37,30 +40,30 @@ async function getHAConfig(){
     crlfDelay: Infinity,
   });
   for await (const line of rl) {
-    HAconfig += line + '\n';
-    if(line.includes('[SERVERS]')) break;
+    HAconfig += `${line}\n`;
+    if (line.includes('[SERVERS]')) break;
   }
   return HAconfig;
 }
 
-async function updateList(){
-  while(true){
-    try{
+async function updateList() {
+  while (true) {
+    try {
       const ipList = await getApplicationIP(appName);
       console.log(ipList);
-      while(!fs.existsSync(configFile)) {
+      while (!fs.existsSync(configFile)) {
         console.log(`${configFile} not found. trying again...`);
         await timer.setTimeout(500);
       }
       let config = await getHAConfig();
-      
-      for (let i = 0; i < ipList.length; i++) {
-        config = config + `    server www${i+1} ${convertIP(ipList[i].ip)}:${appPort} check\n`;
+
+      for (let i = 0; i < ipList.length; i += 1) {
+        config += `    server www${i + 1} ${convertIP(ipList[i].ip)}:${appPort} check\n`;
       }
       console.log(config);
       fs.writeFileSync(configFile, config);
       await cmdAsync('supervisorctl signal USR1 haproxy');
-    } catch(err){
+    } catch (err) {
       console.log(err);
     }
     await timer.setTimeout(1000 * 60 * 20);
