@@ -8,4 +8,4 @@ docker run --name lb -d \
     -v /srv/haproxycfg/haproxy.cfg:/etc/haproxy/haproxy.cfg \
     --network my_network \
     -p 80:80 -p 443:443 -p 8080:8080 \
-    runonflux//flux-lb:latest
+    alihmahdavi/flux-lb:latest
